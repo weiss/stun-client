@@ -1,24 +1,24 @@
-stun
-====
+# stun
 
 A simple STUN client (IPv4-only, UDP-only).
 
 ## Requirements
 
-- [Erlang/OTP][erlang] (for building and running).
-- [Rebar3][rebar3] (only for building).
+- [Erlang/OTP][erlang] 24.0 or newer (on older versions, `stun` is
+  [built][source] from source).
 
-## Building
+## Downloading
 
-    $ rebar3 escriptize
+    $ curl -LO https://github.com/weiss/stun-client/releases/latest/download/stun
 
 ## Installing
 
-    $ sudo install _build/default/bin/stun /usr/local/bin
+    $ sudo install stun /usr/local/bin
 
 ## Running
 
     $ stun stun.conversations.im
 
+[source]: INSTALL.md
 [erlang]: https://erlang.org
 [rebar3]: https://rebar3.org
