@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  release:
+    name: Publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Download Erlang/OTP and Rebar
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '24.x'
+          rebar3-version: '3.19.x'
+      - name: Compile code
+        run: rebar3 compile
+      - name: Build escript
+        run: rebar3 escriptize
+      - name: Run escript
+        run: _build/default/bin/stun stun.conversations.im
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: _build/default/bin/stun
+          omitBody: true

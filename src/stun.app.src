@@ -1,0 +1,9 @@
+{application, stun,
+ [{description, "STUN client"},
+  {vsn, git},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib]},
+  {env, []},
+  {modules, []}]}.
