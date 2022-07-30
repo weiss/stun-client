@@ -1,4 +1,4 @@
-%%% Simple STUN client (IPv4-only, UDP-only).
+%%% Simple STUN client (UDP-only).
 %%%
 %%% Copyright (c) 2022 Holger Weiss <holger@zedat.fu-berlin.de>.
 %%% Copyright (c) 2022 ProcessOne, SARL.

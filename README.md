@@ -1,6 +1,6 @@
 # stun
 
-A simple STUN client (IPv4-only, UDP-only).
+A simple STUN client (UDP-only).
 
 ## Requirements
 
