@@ -21,25 +21,34 @@
 -include("stun.hrl").
 -define(STUN_TIMEOUT, timer:seconds(5)).
 -define(STUN_PORT, "3478").
+-define(STUN_FAMILY, inet).
 
 -spec main([string()]) -> any().
+main(["-4", Server, Port]) ->
+    query(Server, Port, inet);
+main(["-6", Server, Port]) ->
+    query(Server, Port, inet6);
+main(["-4", Server]) ->
+    query(Server, ?STUN_PORT, inet);
+main(["-6", Server]) ->
+    query(Server, ?STUN_PORT, inet6);
 main([Server, Port]) ->
-    query(Server, Port);
+    query(Server, Port, ?STUN_FAMILY);
 main([Server]) ->
-    query(Server, ?STUN_PORT);
+    query(Server, ?STUN_PORT, ?STUN_FAMILY);
 main(_Args) ->
-    abort("Usage: stun <server> [<port>]").
+    abort("Usage: stun [-4|-6] <server> [<port>]").
 
--spec query(inet:hostname(), string()) -> any().
-query(Server0, Port0) ->
+-spec query(inet:hostname(), string(), inet:family()) -> any().
+query(Server0, Port0, Family) ->
     try
-        {ok, Server} = inet:getaddr(Server0, inet),
+        {ok, Server} = inet:getaddr(Server0, Family),
         Port = list_to_integer(Port0),
         TrID = rand:uniform(1 bsl 96),
         Msg = #stun{method = ?STUN_METHOD_BINDING,
                     class = request,
                     trid = TrID},
-        {ok, Sock} = gen_udp:open(0, [binary, {active, false}]),
+        {ok, Sock} = gen_udp:open(0, [Family, binary, {active, false}]),
         PktOut = stun_codec:encode(Msg),
         ok = gen_udp:send(Sock, Server, Port, PktOut),
         {ok, {_, _, PktIn}} = gen_udp:recv(Sock, 0, ?STUN_TIMEOUT),

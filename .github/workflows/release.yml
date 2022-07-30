@@ -23,6 +23,12 @@ jobs:
         run: rebar3 escriptize
       - name: Run escript
         run: _build/default/bin/stun stun.conversations.im
+      - name: Run escript (port number)
+        run: _build/default/bin/stun stun.conversations.im 3478
+      - name: Run escript (IPv4)
+        run: _build/default/bin/stun -4 stun.conversations.im
+      - name: Run escript (IPv4, port number)
+        run: _build/default/bin/stun -4 stun.conversations.im 3478
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
