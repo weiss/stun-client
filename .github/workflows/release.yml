@@ -15,7 +15,7 @@ jobs:
       - name: Download Erlang/OTP and Rebar
         uses: erlef/setup-beam@v1
         with:
-          otp-version: '24.x'
+          otp-version: '23.0.x'
           rebar3-version: '3.19.x'
       - name: Compile code
         run: rebar3 compile
