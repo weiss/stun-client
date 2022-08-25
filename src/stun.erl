@@ -71,8 +71,8 @@ format_error(Err) ->
     unicode:characters_to_list(io_lib:format("~p", [Err])).
 
 -spec abort(iolist() | binary() | atom()) -> no_return().
-abort(Data) ->
-    abort("~s", [Data]).
+abort(Msg) ->
+    abort("~s", [Msg]).
 
 -spec abort(io:format(), [term()]) -> no_return().
 abort(Format, Data) ->
