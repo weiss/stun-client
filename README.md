@@ -4,7 +4,7 @@ A simple STUN client (UDP-only).
 
 ## Requirements
 
-- [Erlang/OTP][erlang] 23.0 or newer (on older versions, `stun` is
+- [Erlang/OTP][erlang] 24.0 or newer (on older versions, `stun` is
   [built][source] from source).
 
 ## Downloading
